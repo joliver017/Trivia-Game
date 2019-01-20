@@ -73,15 +73,35 @@ $(document).ready(function() {
 
   function submitDone() {
     $("#doneBtn").on("click", function() {
-      if ($("input[type='radio']:checked").val() == "ans") {
+    $('input[type="radio"]:checked').each(function() {
+      if ($(this).val() == "ans") {
         correctAns++;
         console.log("Correct: " + correctAns);
+        // console.log(this) This referring to the radio button
       } 
-      else if ($("input:checked").val() == "notAns") {
+      else if ($(this).val() == "notAns") {
         wrongAns++;
         console.log("Incorrect: " + wrongAns);
       }
-
     });
+
+    
+        if ($('input[type="radio"]').is(":checked") == false) {
+          noAns++;
+          console.log("Unanswered: " + noAns);
+        }
+      
+
+    results();
+    
+    });
+  };
+
+  function results() {
+    $("#question").empty();
+    $("#doneBtn").hide();
+    $("#results").append("<p> Correct: " + correctAns + "</p>")
+    $("#results").append("<p> Incorrect: " + wrongAns + "</p>")
+    $("#results").append("<p> Unanswered: " + noAns + "</p>")
   }
 });
