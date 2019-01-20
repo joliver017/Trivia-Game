@@ -35,7 +35,6 @@ $(document).ready(function() {
 
   $("#startBtn").on("click", function() {
     $("#startBtn").hide();
-    $("#timer").html("<h2>Time remaining: " + timer + "</h2>")
     countdown();
 
     $("#question").append(questions[0].question + "<br>");
@@ -162,7 +161,7 @@ $(document).ready(function() {
     $('input[type="radio"]:checked').each(function() {
       if ($(this).val() == "ans") {
         correctAns++;
-        noAns = noAns -3; // The function below is counting ALL unselected radio options, so on the questions where an option is selected, subtract the 3 unselected options
+        noAns = noAns -3; // The results function below is counting ALL unselected radio options, so on the questions where an option IS selected, subtract the 3 unselected options
         console.log("Correct: " + correctAns); // console.log(this) This referring to the radio button
       } 
       else if ($(this).val() == "notAns") {
@@ -192,24 +191,25 @@ $(document).ready(function() {
     $("#results").append("<p> Incorrect: " + wrongAns + "</p>")
     $("#results").append("<p> Unanswered: " + noAns / 4 + "</p>")
     // Unanswered score is divided by 4 for the number of options unselected in each question
-  }
+  };
 
   function countdown() {
+    clearInterval(intervalId);
+    decrement();
     intervalId = setInterval(decrement, 1000);
-  }
+  };
 
   function decrement() {
     $("#timer").html("<h2>Time remaining: " + timer + "</h2>")
     timer --;
 
-    if (timer === 0) {
+    if (timer < 0) {
         stop();
         $("#doneBtn").trigger("click");
     }
-  }
+  };
 
   function stop() {
-      running = false;
       clearInterval(intervalId);
-  }
+  };
 });
