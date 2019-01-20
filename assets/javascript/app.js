@@ -204,7 +204,7 @@ $(document).ready(function() {
 
     if (timer === 0) {
         stop();
-        results();
+        $("#doneBtn").trigger("click");
     }
   }
 
