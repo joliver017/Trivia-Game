@@ -2,7 +2,7 @@ $(document).ready(function() {
   var correctAns = 0;
   var wrongAns = 0;
   var noAns = 0;
-  var timer = 15;
+  var timer = 30;
   var intervalId;
 
   var questions = [
@@ -218,7 +218,7 @@ $(document).ready(function() {
         correctAns = 0;
         wrongAns = 0;
         noAns = 0;
-        timer = 10;
+        timer = 30;
         intervalId;
       });
   };
