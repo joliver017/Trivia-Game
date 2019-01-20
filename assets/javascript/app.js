@@ -2,7 +2,8 @@ $(document).ready(function() {
   var correctAns = 0;
   var wrongAns = 0;
   var noAns = 0;
-  var timer = 30;
+  var timer = 10;
+  var intervalId;
 
   var questions = [
     {
@@ -34,6 +35,9 @@ $(document).ready(function() {
 
   $("#startBtn").on("click", function() {
     $("#startBtn").hide();
+    $("#timer").html("<h2>Time remaining: " + timer + "</h2>")
+    countdown();
+
     $("#question").append(questions[0].question + "<br>");
     $("#question").append(
       "<input name='q1' type=radio value='ans'>" +
@@ -182,10 +186,30 @@ $(document).ready(function() {
 
   function results() {
     $("#question").empty();
+    $("#timer").empty();
     $("#doneBtn").hide();
     $("#results").append("<p> Correct: " + correctAns + "</p>")
     $("#results").append("<p> Incorrect: " + wrongAns + "</p>")
     $("#results").append("<p> Unanswered: " + noAns / 4 + "</p>")
     // Unanswered score is divided by 4 for the number of options unselected in each question
+  }
+
+  function countdown() {
+    intervalId = setInterval(decrement, 1000);
+  }
+
+  function decrement() {
+    $("#timer").html("<h2>Time remaining: " + timer + "</h2>")
+    timer --;
+
+    if (timer === 0) {
+        stop();
+        results();
+    }
+  }
+
+  function stop() {
+      running = false;
+      clearInterval(intervalId);
   }
 });
