@@ -186,11 +186,28 @@ $(document).ready(function() {
   function results() {
     $("#question").empty();
     $("#timer").empty();
-    $("#doneBtn").hide();
+    stop();
+    $("#divBtn").empty();
+    $("#divBtn").append("<button id='resetBtn'> Reset </button>");
     $("#results").append("<p> Correct: " + correctAns + "</p>")
     $("#results").append("<p> Incorrect: " + wrongAns + "</p>")
     $("#results").append("<p> Unanswered: " + noAns / 4 + "</p>")
     // Unanswered score is divided by 4 for the number of options unselected in each question
+    reset();
+  };
+
+  function reset() {
+      $("#resetBtn").on("click", function() {
+        $("#results").empty();
+        $("#startBtn").show();
+        $("#divBtn").empty();
+        stop();
+        correctAns = 0;
+        wrongAns = 0;
+        noAns = 0;
+        timer = 10;
+        intervalId;
+      });
   };
 
   function countdown() {
