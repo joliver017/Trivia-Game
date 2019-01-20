@@ -2,7 +2,7 @@ $(document).ready(function() {
   var correctAns = 0;
   var wrongAns = 0;
   var noAns = 0;
-  var timer = 10;
+  var timer = 15;
   var intervalId;
 
   var questions = [
@@ -33,6 +33,9 @@ $(document).ready(function() {
     },
   ];
 
+// When Start is clicked, start button is hidden, and countdown function for timer starts
+// Questions are appended to the #question div
+// Each answer option has a value to then check whether it is correct or incorrect
   $("#startBtn").on("click", function() {
     $("#startBtn").hide();
     countdown();
@@ -151,18 +154,24 @@ $(document).ready(function() {
         "<br>" +
         "<br>"
     );
-
+// Done button is appended at the bottom and submitDone function below is called onclick
     $("#divBtn").append("<button id='doneBtn'> Done </button>");
     submitDone();
   });
 
+// When Done button is clicked, each radio option is looked over to check if option is selected, then results are shown
+// If the option selected is the answer, increase correctAns by 1
+// If the option selected is not the answer, increase wrongAns by 1
+// If no option is selected, increase noAns by 1
+// Since the function is also checking for ALL unselected radio options, subtract 3 from questions where an option WAS selected
   function submitDone() {
     $("#doneBtn").on("click", function() {
     $('input[type="radio"]:checked').each(function() {
       if ($(this).val() == "ans") {
         correctAns++;
-        noAns = noAns -3; // The results function below is counting ALL unselected radio options, so on the questions where an option IS selected, subtract the 3 unselected options
-        console.log("Correct: " + correctAns); // console.log(this) This referring to the radio button
+        noAns = noAns -3; 
+        console.log("Correct: " + correctAns); 
+        // console.log(this) This referring to the radio button
       } 
       else if ($(this).val() == "notAns") {
         wrongAns++;
@@ -183,6 +192,8 @@ $(document).ready(function() {
     });
   };
 
+// The results function will empty everything on the screen and show the score
+// Reset button is added to restart the game
   function results() {
     $("#question").empty();
     $("#timer").empty();
@@ -196,6 +207,8 @@ $(document).ready(function() {
     reset();
   };
 
+// This function will empty the results screen and show the Start button again
+// Timer and scores are reset to starting values
   function reset() {
       $("#resetBtn").on("click", function() {
         $("#results").empty();
@@ -210,6 +223,7 @@ $(document).ready(function() {
       });
   };
 
+// The following functions are for the timer
   function countdown() {
     clearInterval(intervalId);
     decrement();
