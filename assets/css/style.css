@@ -1,3 +1,7 @@
+body {
+    background-image: url("../images/pokemon_bg.png");
+}
+
 .wrapper {
     background-color: #FFCB05;
     width: 60%;
