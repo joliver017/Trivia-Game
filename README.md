@@ -1,5 +1,6 @@
 # Pokemon Trivia
 This is a short 5 question trivia game that will test your Pokemon knowledge. Click the link below to play.
+
 <a href="https://joliver017.github.io/Trivia-Game/" target="_blank">Launch</a>
 
 ## How to Play
